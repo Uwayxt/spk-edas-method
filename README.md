@@ -1,7 +1,9 @@
 
 ## Sistem Pengambil Keputusan
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Sistem pengambil keputusan yang akan dikembangkan difokuskan pada membantu calon mahasiswa dalam memilih program studi yang tepat, khususnya dalam program studi Teknik Informatika dan Manajemen. Sistem ini akan mengintegrasikan berbagai kriteria evaluasi, seperti nilai akademik, latar belakang pendidikan, prospek karir, fasilitas penunjang.
+
+Pengguna akan diminta untuk memasukkan informasi seperti nilai-nilai akademik mereka, latar belakang pendidikan sebelumnya. Sistem akan menggunakan menggunakan salah satu pengambil keputusan yaitu metode perceptron untuk menganalisis data yang dimasukkan dan memberikan rekomendasi berdasarkan bobot yang telah ditetapkan untuk setiap kriteria.
 
 ## Penentuan Kriteria
 
