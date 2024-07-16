@@ -56,13 +56,8 @@ Untuk penilaian nilai akademik ada mata pelajaran sebagai penunjangnya:
 
 ## Penentuan Penilaian di Setiap mata pelajaran
 
-Dan nilai yang dimasukkan pengguna dalam rentang nilai 0 - 100 di setiap kriteria dibagikan berdasarkan 5 kategori:
+Untuk penilaian akademik nilai yang dimasukkan pengguna dalam rentang nilai 0 - 100 di setiap mata pelajaran berdasarkan jurusan sekolahnya
 
-- Buruk Sekali  
-- Buruk (21-40)
-- Cukup (41 - 60)
-- Baik (61 - 80)
-- Baik Sekali (81 - 100)
 
 ## Penentuan bobot di Setiap Jurusan
 
