@@ -32,6 +32,14 @@ Route::get('/hasil', function () {
     return view('hasil');
 });
 
+Route::get('/login/admin', function () {
+    return view('hasil');
+});
+
+Route::get('/login', function () {
+    return view('hasil');
+});
+
 
 // form
 

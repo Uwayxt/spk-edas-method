@@ -11,7 +11,7 @@ Di awal tentukan Kriteria sebagai perbandingan di tahap selanjutnya
 
 - Nilai Akademik
 - Jurusan Sekolah
-- Akreditasi Program
+- Akreditasi Program 
 - Prospek Kerja
 - Fasilitas Penunjang
 
@@ -27,66 +27,83 @@ Sebagai pemilihan program studi adapun bobotnya untuk menentukan program studi m
 
 ## Pendalaman Kriteria
 
-## Kriteri Nilai Akademik
+
+
+## Kriteria Nilai Akademik
 
 Jika calon mahasiswa berasal dari SMK, mata pelajaran yang tidak diajarkan di SMA, sistem tidak akan memasukkan kriteria tersebut dalam perhitungan nilai akademik untuk calon mahasiswa tersebut.
 
 Untuk penilaian nilai akademik ada mata pelajaran sebagai penunjangnya:
 
 ### SMA (MIPA)
-- MTK
+
 - Fisika
+- Matematika
 - Bahasa Indonesia
 - Bahasa Inggris
-- TIK
-- Seni Rupa
 
 ### SMA (IPS)
 
 - Ekonomi
+- Matematika
 - Bahasa Indonesia
 - Bahasa Inggris
-- TIK
-- Seni Rupa
 
-### SMK
+### SMK (RPL,TKJ,DKV,Akuntansi,OTKP)
 
-- MTK
+- Matematika
 - Bahasa Indonesia
 - Bahasa Inggris
 - Mata Pelajaran Jurusan (Dinamis) Maksimal 2
+
 
 ## Penentuan Penilaian di Setiap mata pelajaran
 
 Untuk penilaian akademik nilai yang dimasukkan pengguna dalam rentang nilai 0 - 100 di setiap mata pelajaran berdasarkan jurusan sekolahnya
 
+- 85 - 100 = 4
+- 70 - 80 = 3
+- 55 - 60 = 2
+- 30 - 50 = 1
 
-## Penentuan bobot di Setiap Jurusan
+## Penentuan Penilaian di Jurusan Sekolah
+
+Terdapat nilai yang berbeda terhadap jurusan sekolah ketika jurusan sekolah tersebut berhubungan dengan jurusan di kuliah
+
+### Teknik Informatika
+- RPL (4)
+- TKJ (3)
+- MIPA (3)
+- DKV (2)
+
+### Manajemen
+
+- Otomatisasi dan Tata Kelola Perkantoran (4)
+- Akuntansi (3)
+- Bisnis Daring dan Pemasaran (3)
+- IPS (2)
+
+## Penentuan Bobot di Setiap Jurusan
 
 Terdapat dua jurusan yang akan dijadikan sebagai peminatan dalam pemilihan program studi, yaitu teknik informatika dan manajemen
 
 ### Teknik Informatika
 
-- MIPA (Jurusan)
-- MTK: 0.25
-- Fisika: 0.15
-- TIK: 0.25
-- Ekonomi: 0.10
-- Seni Rupa: 0.05
-- Bahasa Indonesia: 0.10
-- Bahasa Inggris: 0.10
+- Matematika: 0.3
+- Fisika: 0.2
+- Bahasa Inggris: 0.35
+- Bahasa Indonesia: 0.15
 
 ### Manajemen
 
-- IPS (Jurusan)
-- MTK: 0.15
-- Fisika: 0.05
-- TIK: 0.15
-- Ekonomi: 0.25
-- Seni Rupa: 0.10
-- Bahasa Indonesia: 0.15
+- Ekonomi: 0.3
+- Matematika: 0.2
+- Bahasa Indonesia: 0.35
 - Bahasa Inggris: 0.15
 
-## Referensi 
+ini berarti akan dilakukan perhitungan metode edas
+note :
+ketika pengguna memilih jurusan maka mata pelajaran yang akan di isi akan terfilter agar tidak diisi untuk mapel yang tidak ada
 
+## Referensi
 - (Aplikasi Pemilihan Fakultas di Universitas Klabat Bagi Calon Mahasiswa Menggunakan Metode DSS Fuzzy) [https://cogito.unklab.ac.id/index.php/cogito/article/view/109/78]
