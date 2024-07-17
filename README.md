@@ -56,7 +56,6 @@ Untuk penilaian nilai akademik ada mata pelajaran sebagai penunjangnya:
 - Bahasa Inggris
 - Mata Pelajaran Jurusan (Dinamis) Maksimal 2
 
-
 ## Penentuan Penilaian di Setiap mata pelajaran
 
 Untuk penilaian akademik nilai yang dimasukkan pengguna dalam rentang nilai 0 - 100 di setiap mata pelajaran berdasarkan jurusan sekolahnya
@@ -89,13 +88,15 @@ Terdapat dua jurusan yang akan dijadikan sebagai peminatan dalam pemilihan progr
 
 ### Teknik Informatika
 
-- Matematika: 0.3
+- 2 mata kuliah jurusan (RPL, TKJ, DKV): 1
+- Matematika: 0.2
 - Fisika: 0.2
 - Bahasa Inggris: 0.35
 - Bahasa Indonesia: 0.15
 
 ### Manajemen
 
+- 2 mata kuliah jurusan (AK,BDPM,OTKP)
 - Ekonomi: 0.3
 - Matematika: 0.2
 - Bahasa Indonesia: 0.35
