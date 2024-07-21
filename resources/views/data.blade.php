@@ -3,7 +3,6 @@
 @section('content')
 
 <x-navbar></x-navbar>
-
 <x-sidebar></x-sidebar>
 
 <header class="pt-10 bg-white shadow">

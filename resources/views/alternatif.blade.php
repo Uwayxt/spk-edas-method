@@ -2,11 +2,8 @@
 
 @section('content')
 
-
-
 <x-navbar></x-navbar>
-
-  <x-sidebar></x-sidebar>\
+<x-sidebar></x-sidebar>
 
   <div class="p-4 sm:ml-60">
     <div class="px-4 pt-14">
