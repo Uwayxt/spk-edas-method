@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\KaprodiController;
 use Illuminate\Support\Facades\Route;
 
 // Survey
@@ -8,11 +10,21 @@ Route::get('/', function () {
 });
 
 
+
+
 // Admin
-Route::prefix('admin')->middleware('role:admin')->group(function(){
+
+Route::get('/login-admin',[AdminController::class,'login'])->name('admin.login');
+Route::post('/login-admin/authenticate',[AdminController::class,'authenticate'])->name('admin.authenticate');
+Route::get('/logout',[AdminController::class,'logout'])->name('logout');
+Route::get('/permission-denied', function () {
+    return view('permission-denied');
+})->name('permission-denied');
+
+Route::prefix('admin')->middleware(['auth','role:admin'])->group(function(){
     Route::get('/', function () {
         return view('index');
-    });
+    })->name('admin');
     Route::get('/data', function () {
         return view('data');
     });
@@ -35,9 +47,14 @@ Route::prefix('admin')->middleware('role:admin')->group(function(){
         return view('hasil');
     });
 });
+
 
 // BPM
-Route::prefix('admin')->middleware('role:bpm')->group(function(){
+
+Route::get('/login',[KaprodiController::class,'login'])->name('kaprodi.login');
+Route::post('/login/authenticate',[KaprodiController::class,'authenticate'])->name('kaprodi.authenticate');
+
+Route::prefix('kaprodi')->middleware(['auth','role:kaprodi'])->group(function(){
     Route::get('/', function () {
         return view('index');
     });
@@ -64,13 +81,6 @@ Route::prefix('admin')->middleware('role:bpm')->group(function(){
     });
 });
 
-Route::get('/login/admin', function () {
-    return view('hasil');
-});
-
-Route::get('/login', function () {
-    return view('hasil');
-});
 
 
 // form
