@@ -56,28 +56,10 @@ Route::post('/login/authenticate',[KaprodiController::class,'authenticate'])->na
 
 Route::prefix('kaprodi')->middleware(['auth','role:kaprodi'])->group(function(){
     Route::get('/', function () {
-        return view('index');
+        return view('dashboard');
     });
-    Route::get('/data', function () {
-        return view('data');
-    });
-    Route::get('/kriteria', function () {
-        return view('kriteria');
-    });
-    Route::get('/sub-kriteria', function () {
-        return view('sub-kriteria');
-    });
-    Route::get('/alternatif', function () {
-        return view('alternatif');
-    });
-    Route::get('/penilaian', function () {
-        return view('penilaian');
-    });
-    Route::get('/hitung', function () {
-        return view('hitung');
-    });
-    Route::get('/hasil', function () {
-        return view('hasil');
+    Route::get('/data-survey', function () {
+        return view('data-survey');
     });
 });
 

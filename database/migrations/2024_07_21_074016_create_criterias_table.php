@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('criterias', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->unsignedBigInteger('major_id');
+            $table->foreign('major_id')->on('majors')->references('id')->onDelete('cascade');
             $table->timestamps();
         });
     }
