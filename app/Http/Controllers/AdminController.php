@@ -46,17 +46,12 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
-    public function criteriaIndex()
-    {
-        return view('admin.index');
-    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-
     }
 
     /**
@@ -64,7 +59,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return view('admin.criteria.store');
     }
 
     /**
@@ -72,7 +67,6 @@ class AdminController extends Controller
      */
     public function show(string $id)
     {
-        //
     }
 
     /**
@@ -80,7 +74,6 @@ class AdminController extends Controller
      */
     public function edit(string $id)
     {
-        //
     }
 
     /**
@@ -88,7 +81,7 @@ class AdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
     }
 
     /**

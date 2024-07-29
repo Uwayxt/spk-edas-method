@@ -18,7 +18,7 @@ class StudentController extends Controller
     }
 
     public function index(){
-        return view('admin.student');
+        return view('admin.student.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-
+        return view('admin.student.create');
     }
 
     /**
@@ -42,7 +42,7 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('admin.student.edit');
     }
 
     /**

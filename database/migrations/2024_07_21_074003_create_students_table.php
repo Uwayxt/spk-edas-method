@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('school_address');
+            $table->double('subject_result')->nullable();
+            $table->string('recommendation_result')->nullable();
             $table->unsignedBigInteger('major_id');
             $table->foreign('major_id')->on('majors')->references('id')->onDelete('cascade');
             $table->timestamps();
