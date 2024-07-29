@@ -2,19 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Criteria;
+use App\Models\Major;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
 {
-    public function indexStudent(Request $request)
-    {
-        $input = $request->validate([
+    public function indexStudent(Request $request){
+        $data = Validator::make($request->all(),[
             'name' => 'required',
             'school_address' => 'required',
             'major_id' => 'required'
         ]);
+        if ($data->fails()) {
+            return redirect()->route('biodata.index');
+        }
 
-        return view('form-kriteria',$input);
+        $biodata = $data->validated();
+        $subject = Major::find($biodata['major_id'])->criterias;
+        return view('form-kriteria',['biodata' => $biodata, 'subject' => $subject]);
+    }
+
+    public function indexBiodata(){
+
+        $major = Major::get();
+        return view('form-biodata',['major' => $major]);
     }
 
     public function index(){
@@ -26,6 +39,9 @@ class StudentController extends Controller
      */
     public function create()
     {
+
+
+
         return view('admin.student.create');
     }
 

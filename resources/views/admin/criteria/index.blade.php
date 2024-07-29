@@ -79,7 +79,7 @@
                                 @if (count($item->majors) > 1)
                                     Semua Jurusan
                                 @else
-                                    {{ $item->majors[0]->name ?? ""}}
+                                    {{ $item->majors[0]->name ?? "Semua Jurusan"}}
                                 @endif
                             </th>
                             </td>

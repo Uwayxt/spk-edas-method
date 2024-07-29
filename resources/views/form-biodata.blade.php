@@ -17,21 +17,23 @@
         <div class="sm:col-span-2">
           <label for="name" class="block text-sm font-semibold leading-6 text-gray-900">Nama Lengkap</label>
           <div class="mt-2.5">
-            <input type="text" name="name" value="{{ request()->has('name') ? request('name')  : ''}}" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+            <input type="text" name="name" required value="{{ request()->has('name') ? request('name')  : ''}}" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
           </div>
         </div>
         <div class="sm:col-span-2">
           <label for="school_address" class="block text-sm font-semibold leading-6 text-gray-900">Asal Sekolah</label>
           <div class="mt-2.5">
-            <input type="text" name="school_address" id="school_address" value="{{ request()->has('school_address') ? request('school_address')  : ''}}" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+            <input type="text" name="school_address" required id="school_address" value="{{ request()->has('school_address') ? request('school_address')  : ''}}" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
           </div>
         </div>
         <div class="sm:col-span-2">
-          <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Peminatan</label>
+          <label for="major" class="block text-sm font-semibold leading-6 text-gray-900">Peminatan</label>
           <div class="mt-2.5">
-            <select name="major_id" id="email" autocomplete="email" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
-                <option value="1">IPA</option>
-                <option>IPS</option>
+            <select name="major_id" id="major" required class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                <option value="">Pilih Jurusan Sekolah</option>
+                @foreach($major as $item)
+                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                @endforeach
             </select>
           </div>
         </div>

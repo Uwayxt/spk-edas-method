@@ -12,9 +12,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/biodata', function () {
-    return view('form-biodata');
-});
+Route::get('/biodata', [StudentController::class,'indexBiodata'])->name('biodata.index');
 
 Route::get('/kriteria', [StudentController::class,'indexStudent'])->name('student.index');
 Route::post('/kriteria', [StudentController::class,'create'])->name('student.create');
