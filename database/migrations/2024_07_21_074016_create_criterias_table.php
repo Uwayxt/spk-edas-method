@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->double('weight');
+            $table->enum('role_criteria',['all','all-subject','subject']);
             $table->timestamps();
         });
     }

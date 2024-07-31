@@ -20,8 +20,13 @@ class CriteriaController extends Controller
      */
     public function create()
     {
+        return view('admin.criteria.create');
+    }
+
+    public function createSubject()
+    {
         $major = Major::all();
-        return view('admin.criteria.create', ['major' => $major]);
+        return view('admin.criteria.create_subject', ['major' => $major]);
     }
 
     /**
@@ -32,27 +37,47 @@ class CriteriaController extends Controller
         $data = $request->validate([
             'name' => ['required'],
             'weight' => ['required'],
+        ]);
+
+        $criteria = Criteria::create([
+            'name' => $data['name'],
+            'weight' => $data['weight'],
+            'role_criteria' => 'all'
+        ]);
+        $criteria->majors()->attach($data['major_id']);
+
+        return redirect()->route('criteria.index')->with('message','Berhasil Menambahkan Kriteria');
+    }
+
+    public function storeSubject(Request $request)
+    {
+        $data = $request->validate([
+            'name' => ['required'],
+            'weight' => ['required'],
             'major_id' => ['required']
         ]);
 
+
         if ($data['major_id'] == 'all') {
-            $major = Major::all();
             $criteria = Criteria::create([
                 'name' => $data['name'],
-                'weight' => $data['weight']
+                'weight' => $data['weight'],
+                'role_criteria' => 'all-subject'
             ]);
+            $major = Major::all();
             foreach ($major as $value) {
                 $criteria->majors()->attach($value->id);
             }
         }else{
-            $criteria =  $criteria = Criteria::create([
+            $criteria = Criteria::create([
                 'name' => $data['name'],
-                'weight' => $data['weight']
+                'weight' => $data['weight'],
+                'role_criteria' => 'subject'
             ]);
             $criteria->majors()->attach($data['major_id']);
         }
-        return redirect()->route('criteria.index')->with('message','Berhasil Menambahkan Kriteria');
 
+        return redirect()->route('criteria.index')->with('message','Berhasil Menambahkan Kriteria');
     }
 
     /**

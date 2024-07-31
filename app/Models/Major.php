@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Major extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','weight'];
+    protected $fillable = ['name','weight','study_program'];
 
     public function criterias(){
         return $this->belongsToMany(Criteria::class);

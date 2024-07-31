@@ -14,8 +14,8 @@ Route::get('/', function () {
 
 Route::get('/biodata', [StudentController::class,'indexBiodata'])->name('biodata.index');
 
-Route::get('/kriteria', [StudentController::class,'indexStudent'])->name('student.index');
-Route::post('/kriteria', [StudentController::class,'create'])->name('student.create');
+Route::get('/kriteria', [StudentController::class,'create'])->name('student.create');
+Route::post('/kriteria', [StudentController::class,'store'])->name('student.store');
 
 // Admin
 Route::get('/login-admin',[AdminController::class,'login'])->name('admin.login');
@@ -36,6 +36,9 @@ Route::prefix('admin')->middleware(['role:admin'])->group(function(){
     Route::get('/kriteria/{id}/', [CriteriaController::class,'show'])->name('criteria.show');
     Route::get('/kriteria/{id}/edit', [CriteriaController::class,'edit'])->name('criteria.edit');
     Route::put('/kriteria/{id}/', [CriteriaController::class,'update'])->name('criteria.update');
+
+    Route::get('/kriteria/tambah-subjek', [CriteriaController::class,'createSubject'])->name('criteria.subject.create');
+    Route::post('/kriteria/simpan-subjek', [CriteriaController::class,'storeSubject'])->name('criteria.subject.store');
 
     // Siswa
     Route::get('/siswa', [StudentController::class,'index'])->name('admin.student.index');

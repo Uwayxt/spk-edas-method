@@ -9,17 +9,34 @@
       <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Isi Formulir</h2>
       <p class="mt-2 text-lg leading-8 text-gray-600"><span class="font-bold">Pastikan untuk memasukkan semua nilai yang diperlukan dengan benar sesuai nilai akhir sekolah.</p>
     </div>
-    <form action="{{ route('student.create') }}" method="POST" class="mx-auto mt-16 max-w-xl sm:mt-20">
+    <form action="{{ route('student.store') }}" method="POST" class="mx-auto mt-16 max-w-xl sm:mt-20">
         @csrf
-        <input type="text" value="{{ $biodata['name'] }}" hidden>
-        <input type="text" value="{{ $biodata['school_address'] }}" hidden>
-        <input type="text" value="{{ $biodata['major_id'] }}" hidden>
+        <input type="text" name="name" value="{{ $biodata['name'] }}" hidden>
+        <input type="text" name="school_address" value="{{ $biodata['school_address'] }}" hidden>
+        <input type="text" name="major_id" value="{{ $biodata['major_id'] }}" hidden>
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             @foreach($subject as $item)
                 <div class="sm:col-span-2">
                     <label for="name" class="block text-sm font-semibold leading-6 text-gray-900">{{ $item->name }}</label>
                     <div class="mt-2.5">
-                        <input type="text" name="company" id="company" placeholder="Masukkan Nilai" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                        <div class="flex  gap-5 justify-between">
+                            <div class="flex items-center w-full ps-4 border border-gray-200 rounded">
+                                <input id="bordered-radio-1-{{ $item->id }}" type="radio" value="1" name="subject[{{ $item->id }}]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="bordered-radio-1-{{ $item->id }}" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">0 - 25</label>
+                            </div>
+                            <div class="flex items-center w-full ps-4 border border-gray-200 rounded">
+                                <input checked id="bordered-radio-2-{{ $item->id }}" type="radio" value="2" name="subject[{{ $item->id }}]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="bordered-radio-2-{{ $item->id }}" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">26 - 50</label>
+                            </div>
+                            <div class="flex items-center w-full ps-4 border border-gray-200 rounded">
+                                <input checked id="bordered-radio-3-{{ $item->id }}" type="radio" value="3" name="subject[{{ $item->id }}]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="bordered-radio-3-{{ $item->id }}" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">51 - 75</label>
+                            </div>
+                            <div class="flex items-center w-full ps-4 border border-gray-200 rounded">
+                                <input checked id="bordered-radio-4-{{ $item->id }}" type="radio" value="4" name="subject[{{ $item->id }}]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="bordered-radio-4-{{ $item->id }}" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">76 - 100</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             @endforeach

@@ -12,7 +12,7 @@
 
 
 
-    <form action="{{ route('student.index') }}" method="get" class="mx-auto mt-16 max-w-xl sm:mt-20">
+    <form action="{{ route('student.create') }}" method="get" class="mx-auto mt-16 max-w-xl sm:mt-20">
       <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
         <div class="sm:col-span-2">
           <label for="name" class="block text-sm font-semibold leading-6 text-gray-900">Nama Lengkap</label>

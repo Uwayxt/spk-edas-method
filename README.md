@@ -9,7 +9,7 @@ Pengguna akan diminta untuk memasukkan informasi seperti nilai-nilai akademik me
 
 Di awal tentukan Kriteria sebagai perbandingan di tahap selanjutnya
 
-- Nilai Akademik
+- Nilai Akademik 
 - Jurusan Sekolah
 - Akreditasi Program 
 - Prospek Kerja
@@ -19,15 +19,27 @@ Di awal tentukan Kriteria sebagai perbandingan di tahap selanjutnya
 
 Sebagai pemilihan program studi adapun bobotnya untuk menentukan program studi mana yang cocok
 
-- Nilai Akademik (0,4)
-- Jurusan Sekolah (0,3)
-- Akreditasi Program (0,2)
-- Prospek Kerja (0,05)
-- Fasilitas Penunjang (0,05)
+Bobot Teknik Informatika
+- Mata Pelajaran Dinamis (sesuai jurusan): 0.25 (25%) / Fisika
+- Mata Pelajaran Matematika: 0.2 (20%)
+- Mata Pelajaran Bahasa Indonesia: 0.15 (15%)
+- Mata Pelajaran Bahasa Inggris: 0.15 (15%)
+- Jurusan Sekolah: 0.1 (10%)
+- Akreditasi Program: 0.05 (5%)
+- Prospek Kerja: 0.05 (5%)
+- Fasilitas Penunjang: 0.05 (5%)
 
-## Pendalaman Kriteria
+Bobot Manajemen
+- Mata Pelajaran Dinamis (sesuai jurusan): 0.25 (25%) / Ekonomi
+- Mata Pelajaran Matematika: 0.2 (20%)
+- Mata Pelajaran Bahasa Indonesia: 0.15 (15%)
+- Mata Pelajaran Bahasa Inggris: 0.15 (15%)
+- Jurusan Sekolah: 0.1 (10%)
+- Akreditasi Program: 0.05 (5%)
+- Prospek Kerja: 0.05 (5%)
+- Fasilitas Penunjang: 0.05 (5%)
 
-
+note : ketika kriteria yang dipilih teknik informatika maka mata pelajaran yang tidak berelasi dengan manajemen akan menjadi tipe cost
 
 ## Kriteria Nilai Akademik
 
@@ -54,7 +66,7 @@ Untuk penilaian nilai akademik ada mata pelajaran sebagai penunjangnya:
 - Matematika
 - Bahasa Indonesia
 - Bahasa Inggris
-- Mata Pelajaran Jurusan (Dinamis) Maksimal 2
+- Mata Pelajaran Jurusan (Dinamis) 1
 
 ## Penentuan Penilaian di Setiap mata pelajaran
 
@@ -88,7 +100,7 @@ Terdapat dua jurusan yang akan dijadikan sebagai peminatan dalam pemilihan progr
 
 ### Teknik Informatika
 
-- 2 mata kuliah jurusan (RPL, TKJ, DKV): 1
+- 1 mata kuliah jurusan (RPL, TKJ, DKV): 1
 - Matematika: 0.2
 - Fisika: 0.2
 - Bahasa Inggris: 0.35
@@ -96,7 +108,7 @@ Terdapat dua jurusan yang akan dijadikan sebagai peminatan dalam pemilihan progr
 
 ### Manajemen
 
-- 2 mata kuliah jurusan (AK,BDPM,OTKP)
+- 1 mata kuliah jurusan (AK,BDPM,OTKP)
 - Ekonomi: 0.3
 - Matematika: 0.2
 - Bahasa Indonesia: 0.35
@@ -108,3 +120,4 @@ ketika pengguna memilih jurusan maka mata pelajaran yang akan di isi akan terfil
 
 ## Referensi
 - (Aplikasi Pemilihan Fakultas di Universitas Klabat Bagi Calon Mahasiswa Menggunakan Metode DSS Fuzzy) [https://cogito.unklab.ac.id/index.php/cogito/article/view/109/78]
+- (Evaluation based on Distance from Average Solution (EDAS)) [https://extra.cahyadsn.com/edas]
