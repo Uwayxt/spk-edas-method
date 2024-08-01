@@ -174,11 +174,11 @@ class StudentController extends Controller
             $NDA[$key] = array();
             foreach($alternative as $key_c => $criteria ){
                 if($type == 'benefit'){
-                    $PDA[$key][$key_c] = max(0,($criteria-$AV[$key_c])/$AV[$key_c]);
-                    $NDA[$key][$key_c] = max(0,($AV[$key_c]-$criteria)/$AV[$key_c]);
+                    $PDA[$key][$key_c] = max(0,($criteria-$AV[$key_c]) / $AV[$key_c]);
+                    $NDA[$key][$key_c] = max(0,($AV[$key_c]-$criteria) / $AV[$key_c]);
                 }else{
-                    $PDA[$key][$key_c] = max(0,($AV[$key_c]-$criteria)/$AV[$key_c]);
-                    $NDA[$key][$key_c] = max(0,($criteria-$AV[$key_c])/$AV[$key_c]);
+                    $PDA[$key][$key_c] = max(0,($AV[$key_c]-$criteria) / $AV[$key_c]);
+                    $NDA[$key][$key_c] = max(0,($criteria-$AV[$key_c]) / $AV[$key_c]);
                 }
             }
         }
@@ -190,12 +190,12 @@ class StudentController extends Controller
     private function calculateSP_SN($data,$PDA,$NDA,$weight){
         $SP = array();
         $SN = array();
-        foreach($data as $keya => $alternative){
-            $SP[$keya] = 0;
-            $SN[$keya] = 0;
+        foreach($data as $key => $alternative){
+            $SP[$key] = 0;
+            $SN[$key] = 0;
             foreach($alternative as $keyc => $criteria_value){
-                $SP[$keya] += $weight[$keyc] * $PDA[$keya][$keyc];
-                $SN[$keya] += $weight[$keyc] * $NDA[$keya][$keyc];
+                $SP[$key] += $weight[$keyc] * $PDA[$key][$keyc];
+                $SN[$key] += $weight[$keyc] * $NDA[$key][$keyc];
             }
         }
 
@@ -205,10 +205,10 @@ class StudentController extends Controller
     private function normalizeSP_SN($data,$SP,$SN){
         $NSP = array();
         $NSN = array();
-        foreach($data as $keya => $alternative)
+        foreach($data as $key => $alternative)
         {
-            $NSP[$keya] = $SP[$keya] / max($SP);
-            $NSN[$keya] = 1 - $SN[$keya] / max($SN);
+            $NSP[$key] = $SP[$key] / max($SP);
+            $NSN[$key] = 1 - $SN[$key] / max($SN);
         }
         return [$NSP,$NSN];
     }
