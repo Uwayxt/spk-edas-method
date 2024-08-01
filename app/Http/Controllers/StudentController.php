@@ -214,10 +214,10 @@ class StudentController extends Controller
     }
 
     private function calculateApraisalScore($data,$NSP,$NSN){
-        $AS=array();
+        $AS = array();
         foreach($data as $key => $alternatif)
         {
-            $AS[$key]=($NSP[$key]+$NSN[$key])/2;
+            $AS[$key] = ($NSP[$key] + $NSN[$key]) / 2;
         }
 
         return $AS;
