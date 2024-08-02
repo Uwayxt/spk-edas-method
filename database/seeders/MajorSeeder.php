@@ -18,6 +18,18 @@ class MajorSeeder extends Seeder
             'study_program' => 'TI',
         ]);
         Major::create([
+            'name' => 'RPL',
+            'study_program' => 'TI',
+        ]);
+        Major::create([
+            'name' => 'MM',
+            'study_program' => 'TI',
+        ]);
+        Major::create([
+            'name' => 'TKJ',
+            'study_program' => 'TI',
+        ]);
+        Major::create([
             'name' => 'SMA (IPS)',
             'study_program' => 'MJ',
         ]);
@@ -32,18 +44,6 @@ class MajorSeeder extends Seeder
         Major::create([
             'name' => 'OTKP',
             'study_program' => 'MJ',
-        ]);
-        Major::create([
-            'name' => 'RPL',
-            'study_program' => 'TI',
-        ]);
-        Major::create([
-            'name' => 'MM',
-            'study_program' => 'TI',
-        ]);
-        Major::create([
-            'name' => 'TKJ',
-            'study_program' => 'TI',
         ]);
     }
 }

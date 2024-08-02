@@ -13,4 +13,8 @@ class Major extends Model
     public function criterias(){
         return $this->belongsToMany(Criteria::class);
     }
+
+    public function students()  {
+        return $this->hasMany(Student::class);
+    }
 }

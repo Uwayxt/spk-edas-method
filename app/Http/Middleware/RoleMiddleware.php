@@ -19,15 +19,15 @@ class RoleMiddleware
         if (!Auth::check()) {
             if ($role == 'admin') {
                 return redirect()->route('admin.login');
-            }elseif ($role == 'kaprodi') {
+            }elseif ($role == 'kaprodi-TI' || $role == 'kaprodi-MJ') {
                 return redirect()->route('kaprodi.login');
             }else {
                 return redirect('/');
             }
         }
-        if ($request->user()->role === $role) {
-            return $next($request);
+        if ($request->user()->role !== $role) {
+            return redirect('/');
         }
-        return dd($request->user());
+        return $next($request);
     }
 }

@@ -110,7 +110,6 @@ class StudentController extends Controller
                 arsort($AS);
                 $huhu = key($AS);
                 return dd($subject,$data['subject'],$matrix,$weights,$SP_SN,$AS, $huhu);
-                // return dd($matrix,$AV,max(0,$call),$PDA_NDA);
         }else {
             return redirect()->route('biodata.index');
         }

@@ -11,8 +11,9 @@ class CriteriaController extends Controller
 {
     public function index()
     {
-        $criteria = Criteria::with('majors')->simplePaginate(10);
-        return view('admin.criteria.index',['criteria' => $criteria]);
+        $criteria = Criteria::with('majors')->where('role_criteria','all')->simplePaginate(10);
+        $criteria_subject = Criteria::with('majors')->where('role_criteria','all_subject')->orWhere('role_criteria', 'subject')->simplePaginate(10);
+        return view('admin.criteria.index',['criteria' => $criteria, 'criteria_subject' => $criteria_subject]);
     }
 
     /**
@@ -44,7 +45,7 @@ class CriteriaController extends Controller
             'weight' => $data['weight'],
             'role_criteria' => 'all'
         ]);
-        $criteria->majors()->attach($data['major_id']);
+        // $criteria->majors()->attach($data['major_id']);
 
         return redirect()->route('criteria.index')->with('message','Berhasil Menambahkan Kriteria');
     }
@@ -65,6 +66,16 @@ class CriteriaController extends Controller
                 'role_criteria' => 'all-subject'
             ]);
             $major = Major::all();
+            foreach ($major as $value) {
+                $criteria->majors()->attach($value->id);
+            }
+        }else if ($data['major_id'] == 'smk') {
+            $criteria = Criteria::create([
+                'name' => $data['name'],
+                'weight' => $data['weight'],
+                'role_criteria' => 'subject'
+            ]);
+            $major = Major::whereIn('name',['OTKP','BDPM'.'Akuntansi','RPL', 'TKJ', 'Multimedia'])->get();
             foreach ($major as $value) {
                 $criteria->majors()->attach($value->id);
             }

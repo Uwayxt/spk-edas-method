@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Criteria;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +19,7 @@ class KaprodiController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password'],'role' => 'admin'])) {
+        if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
             $request->session()->regenerate();
 
             return redirect()->intended('kaprodi');
@@ -37,7 +39,7 @@ class KaprodiController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('login');
+        return redirect('/');
     }
 
     /**
@@ -45,7 +47,12 @@ class KaprodiController extends Controller
      */
     public function index()
     {
-        //
+        // $student = Student::with('majors')->get();
+        $student = Student::whereHas('majors', function ($query) {
+            $query->where('study_program', 'TI');
+        })->get();
+        // return dd($student[0]->majors);
+        return view('kaprodi.index',['student' => $student]);
     }
 
     /**
@@ -94,5 +101,27 @@ class KaprodiController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function indexCriteria()
+    {
+        $criteria = Criteria::with('majors')->where('role_criteria','all')->simplePaginate(10);
+        return view('kaprodi.criteria.index',['criteria' => $criteria]);
+    }
+
+    public function editCriteria(string $id)
+    {
+        $criteria = Criteria::find($id);
+        return view('kaprodi.criteria.edit',['criteria' => $criteria]);
+    }
+
+    public function updateCriteria(Request $request, string $id)
+    {
+        $data = $request->validate([
+            'weight' => ['required']
+        ]);
+        $criteria = Criteria::find($id);
+        $criteria->update($data);
+        return redirect()->route('kaprodi.criteria.index');
     }
 }

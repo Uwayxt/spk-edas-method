@@ -10,4 +10,8 @@ class Student extends Model
     use HasFactory;
 
     protected $fillable = ['name','school_address','major_id','subject_result','recomendation_result'];
+
+    public function majors()  {
+        return $this->belongsTo(Major::class,'major_id','id');
+    }
 }

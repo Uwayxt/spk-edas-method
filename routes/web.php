@@ -18,6 +18,7 @@ Route::get('/kriteria', [StudentController::class,'create'])->name('student.crea
 Route::post('/kriteria', [StudentController::class,'store'])->name('student.store');
 
 // Admin
+
 Route::get('/login-admin',[AdminController::class,'login'])->name('admin.login');
 Route::post('/login-admin/authenticate',[AdminController::class,'authenticate'])->name('admin.authenticate');
 Route::get('/logout',[AdminController::class,'logout'])->name('logout');
@@ -29,6 +30,10 @@ Route::prefix('admin')->middleware(['role:admin'])->group(function(){
     // Dashboard
     Route::get('/', [AdminController::class,'index'])->name('admin.index');
 
+    // Kriteria Nilai Akademik
+    Route::get('/kriteria/tambah-subjek', [CriteriaController::class,'createSubject'])->name('criteria.subject.create');
+    Route::post('/kriteria/tambah-subjek', [CriteriaController::class,'storeSubject'])->name('criteria.subject.store');
+
     // Kriteria
     Route::get('/kriteria', [CriteriaController::class,'index'])->name('criteria.index');
     Route::get('/kriteria/tambah', [CriteriaController::class,'create'])->name('criteria.create');
@@ -37,8 +42,6 @@ Route::prefix('admin')->middleware(['role:admin'])->group(function(){
     Route::get('/kriteria/{id}/edit', [CriteriaController::class,'edit'])->name('criteria.edit');
     Route::put('/kriteria/{id}/', [CriteriaController::class,'update'])->name('criteria.update');
 
-    Route::get('/kriteria/tambah-subjek', [CriteriaController::class,'createSubject'])->name('criteria.subject.create');
-    Route::post('/kriteria/simpan-subjek', [CriteriaController::class,'storeSubject'])->name('criteria.subject.store');
 
     // Siswa
     Route::get('/siswa', [StudentController::class,'index'])->name('admin.student.index');
@@ -56,34 +59,17 @@ Route::prefix('admin')->middleware(['role:admin'])->group(function(){
     Route::get('/jurusan/{id}/edit', [MajorController::class,'edit'])->name('major.edit');
     Route::put('/siswa/{id}/', [MajorController::class,'update'])->name('major.update');
 
-
-    // Route::get('/sub-kriteria', function () {
-    //     return view('sub-kriteria');
-    // });
-    // Route::get('/alternatif', function () {
-    //     return view('alternatif');
-    // });
-    // Route::get('/penilaian', function () {
-    //     return view('penilaian');
-    // });
-    // Route::get('/hitung', function () {
-    //     return view('hitung');
-    // });
-    // Route::get('/hasil', function () {
-    //     return view('hasil');
-    // });
 });
 
 
-// BPM
+// Kaprodi
 Route::get('/login',[KaprodiController::class,'login'])->name('kaprodi.login');
 Route::post('/login/authenticate',[KaprodiController::class,'authenticate'])->name('kaprodi.authenticate');
 
-Route::prefix('kaprodi')->middleware(['role:kaprodi'])->group(function(){
-    Route::get('/', function () {
-        return view('dashboard');
-    });
-    Route::get('/data-survey', function () {
-        return view('data-survey');
-    });
+Route::prefix('kaprodi')->middleware(['role:kaprodi-TI,kaprodi-MJ'])->group(function(){
+    Route::get('/', [KaprodiController::class,'index'])->name('kaprodi.index');
+    Route::get('/kriteria', [KaprodiController::class,'indexCriteria'])->name('kaprodi.criteria.index');
+    Route::get('/kriteria/{id}/edit', [KaprodiController::class,'editCriteria'])->name('kaprodi.criteria.edit');
+    Route::put('/kriteria/{id}', [KaprodiController::class,'updateCriteria'])->name('kaprodi.criteria.update');
+
 });
