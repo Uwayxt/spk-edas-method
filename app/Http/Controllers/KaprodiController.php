@@ -103,6 +103,12 @@ class KaprodiController extends Controller
         //
     }
 
+    public function showStudent(string $id)
+    {
+        $student = Student::with('subjectStudent')->find($id);
+
+        return view('kaprodi.show_student',['student' => $student]);
+    }
     public function indexCriteria()
     {
         $criteria = Criteria::with('majors')->where('role_criteria','all')->simplePaginate(10);

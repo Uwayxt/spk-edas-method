@@ -65,8 +65,9 @@ class StudentController extends Controller
                 $criteria = Criteria::where('role_criteria','all-subject')->orWhere('role_criteria','subject')->get();
                 $weights = [];
                 $subject = [];
+                $major_MJ_result = $this->majorValue($major);
                 array_push($matrix["MJ"],
-                '3',  // Jurusan Sekolah
+                $major_MJ_result,  // Jurusan Sekolah
                 '3',  // Akreditasi Program
                 '2',  // Prospek Kerja
                 '4'   // Fasilitas Penunjang
@@ -84,13 +85,15 @@ class StudentController extends Controller
                         }
                     }
                 }
+                $major_TI_result = $this->majorValue($major);
                 array_push($subject,
-                '4',  // Jurusan Sekolah
+                $major_TI_result,  // Jurusan Sekolah
                 '3',  // Akreditasi Program
                 '2',  // Prospek Kerja
                 '4'   // Fasilitas Penunjang
                 );
 
+                // Bobot
                 array_push($weights,
                 '0.3',  // Jurusan Sekolah
                 '0.1',  // Akreditasi Program
@@ -120,9 +123,9 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        return view('admin.student.edit');
+        return view('hasil_kriteria');
     }
 
     /**
@@ -220,5 +223,50 @@ class StudentController extends Controller
         }
 
         return $AS;
+    }
+
+    private function majorValue($major){
+        $value = 0;
+        if($major['study_program'] == 'TI'){
+            switch ($major['name']) {
+                case 'RPL':
+                    $value = 4;
+                    break;
+                case 'TKJ':
+                    $value = 3;
+                    break;
+                case 'SMA (MIPA)':
+                    $value = 3;
+                    break;
+                case 'DKV':
+                    $value = 2;
+                    break;
+
+                default:
+                    $value = 2;
+                    break;
+            }
+            return $value;
+        }else{
+            switch ($major['name']) {
+                case 'OTKP':
+                    $value = 4;
+                    break;
+                case 'Akuntansi':
+                    $value = 3;
+                    break;
+                case 'BDPM':
+                    $value = 3;
+                    break;
+                case 'SMA (IPS)':
+                    $value = 2;
+                    break;
+
+                default:
+                    $value = 2;
+                    break;
+            }
+            return $value;
+        }
     }
 }

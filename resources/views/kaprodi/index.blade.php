@@ -71,7 +71,7 @@
                             </th>
                             </td>
                             <td class="flex items-center px-6 py-4">
-                                <a href="{{ route('kaprodi.criteria.edit',['id' => $item->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a>
+                                <a href="{{ route('kaprodi.student.show',['id' => $item->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a>
                             </td>
                         </tr>
 

@@ -16,6 +16,7 @@ Route::get('/biodata', [StudentController::class,'indexBiodata'])->name('biodata
 
 Route::get('/kriteria', [StudentController::class,'create'])->name('student.create');
 Route::post('/kriteria', [StudentController::class,'store'])->name('student.store');
+Route::get('/kriteria/hasil', [StudentController::class,'show'])->name('student.show');
 
 // Admin
 
@@ -31,8 +32,10 @@ Route::prefix('admin')->middleware(['role:admin'])->group(function(){
     Route::get('/', [AdminController::class,'index'])->name('admin.index');
 
     // Kriteria Nilai Akademik
-    Route::get('/kriteria/tambah-subjek', [CriteriaController::class,'createSubject'])->name('criteria.subject.create');
-    Route::post('/kriteria/tambah-subjek', [CriteriaController::class,'storeSubject'])->name('criteria.subject.store');
+    Route::get('/kriteria/subjek/tambah', [CriteriaController::class,'createSubject'])->name('criteria.subject.create');
+    Route::post('/kriteria/subjek/simpan', [CriteriaController::class,'storeSubject'])->name('criteria.subject.store');
+    Route::get('/kriteria/subjek/{id}/edit', [CriteriaController::class,'editSubject'])->name('criteria.subject.edit');
+    Route::put('/kriteria/subjek/{id}', [CriteriaController::class,'updateSubject'])->name('criteria.subject.update');
 
     // Kriteria
     Route::get('/kriteria', [CriteriaController::class,'index'])->name('criteria.index');
@@ -49,7 +52,6 @@ Route::prefix('admin')->middleware(['role:admin'])->group(function(){
     Route::post('/siswa/simpan', [StudentController::class,'store'])->name('admin.student.store');
     Route::get('/siswa/{id}/', [StudentController::class,'show'])->name('admin.student.show');
     Route::get('/siswa/{id}/edit', [StudentController::class,'edit'])->name('admin.student.edit');
-    Route::put('/siswa/{id}/', [StudentController::class,'update'])->name('criteria.update');
 
     // Jurusan
     Route::get('/jurusan', [MajorController::class,'index'])->name('major.index');
@@ -71,5 +73,6 @@ Route::prefix('kaprodi')->middleware(['role:kaprodi-TI,kaprodi-MJ'])->group(func
     Route::get('/kriteria', [KaprodiController::class,'indexCriteria'])->name('kaprodi.criteria.index');
     Route::get('/kriteria/{id}/edit', [KaprodiController::class,'editCriteria'])->name('kaprodi.criteria.edit');
     Route::put('/kriteria/{id}', [KaprodiController::class,'updateCriteria'])->name('kaprodi.criteria.update');
+    Route::get('/siswa/{id}', [KaprodiController::class,'showStudent'])->name('kaprodi.student.show');
 
 });

@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('value_criteria', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('criteria_id');
-            $table->unsignedBigInteger('user_id');
+            $table->enum('role',['TI','MJ']);
             $table->double('value');
             $table->foreign('criteria_id')->on('criterias')->references('id')->onDelete('cascade');
-            $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
             $table->timestamps();
         });
     }

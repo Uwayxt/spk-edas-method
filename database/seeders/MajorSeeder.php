@@ -22,7 +22,7 @@ class MajorSeeder extends Seeder
             'study_program' => 'TI',
         ]);
         Major::create([
-            'name' => 'MM',
+            'name' => 'DKV',
             'study_program' => 'TI',
         ]);
         Major::create([

@@ -12,7 +12,7 @@ class CriteriaController extends Controller
     public function index()
     {
         $criteria = Criteria::with('majors')->where('role_criteria','all')->simplePaginate(10);
-        $criteria_subject = Criteria::with('majors')->where('role_criteria','all_subject')->orWhere('role_criteria', 'subject')->simplePaginate(10);
+        $criteria_subject = Criteria::with('majors')->where('role_criteria','all-subject')->orWhere('role_criteria', 'subject')->simplePaginate(10);
         return view('admin.criteria.index',['criteria' => $criteria, 'criteria_subject' => $criteria_subject]);
     }
 
@@ -24,11 +24,6 @@ class CriteriaController extends Controller
         return view('admin.criteria.create');
     }
 
-    public function createSubject()
-    {
-        $major = Major::all();
-        return view('admin.criteria.create_subject', ['major' => $major]);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -48,6 +43,51 @@ class CriteriaController extends Controller
         // $criteria->majors()->attach($data['major_id']);
 
         return redirect()->route('criteria.index')->with('message','Berhasil Menambahkan Kriteria');
+    }
+
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $criteria = Criteria::find($id);
+        return view('admin.criteria.edit',['criteria' => $criteria]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $data = $request->validate([
+            'name' => ['required'],
+            'weight' => ['required'],
+        ]);
+        $criteria = Criteria::find($id);
+        $criteria->update($data);
+        return redirect()->route('criteria.index')->with('message','Berhasil Menambahkan Kriteria');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+
+    public function createSubject()
+    {
+        $major = Major::all();
+        return view('admin.criteria.create_subject', ['major' => $major]);
     }
 
     public function storeSubject(Request $request)
@@ -91,34 +131,44 @@ class CriteriaController extends Controller
         return redirect()->route('criteria.index')->with('message','Berhasil Menambahkan Kriteria');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function editSubject(string $id)
     {
+        $criteria = Criteria::find($id);
+        $major = Major::all();
+
+        return view('admin.criteria.edit_subject',['criteria' => $criteria, 'major' => $major]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function updateSubject(Request $request, string $id)
     {
-        return view('admin.criteria.show');
-    }
+        $data = $request->validate([
+            'name' => ['required'],
+            'weight' => ['required'],
+            'major_id' => ['required']
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        if ($data['major_id'] == 'all') {
+            $criteria = Criteria::find($id);
+            $major = Major::all();
+            $criteria->update([
+                'name' => $data['name'],
+                'weight' => $data['weight'],
+                'role_criteria' => 'all-subject'
+            ]);
+            foreach ($major as $value) {
+                $criteria->majors()->attach($value->id);
+            }
+        }else{
+            $criteria = Criteria::find($id);
+            $criteria->update([
+                'name' => $data['name'],
+                'weight' => $data['weight'],
+                'role_criteria' => 'all-subject'
+            ]);
+            $criteria->majors()->detach();
+            $criteria->majors()->attach($data['major_id']);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('criteria.index')->with('message','Berhasil Menambahkan Kriteria');
     }
 }

@@ -32,7 +32,7 @@
                                 Nama Kriteria
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Bobot
+                                Nilai Kriteria
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Jurusan
@@ -69,7 +69,7 @@
                             </th>
                             </td>
                             <td class="flex items-center px-6 py-4">
-                                <a href="{{ route('kaprodi.criteria.edit',['id' => $item->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                <a href="{{ route('kaprodi.criteria.show',['id' => $item->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Ubah Nilai</a>
                             </td>
                         </tr>
 

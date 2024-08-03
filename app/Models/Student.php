@@ -14,4 +14,8 @@ class Student extends Model
     public function majors()  {
         return $this->belongsTo(Major::class,'major_id','id');
     }
+
+    public function subjectStudent()  {
+        return $this->belongsToMany(Criteria::class);
+    }
 }

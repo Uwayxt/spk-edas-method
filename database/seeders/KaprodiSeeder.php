@@ -16,7 +16,13 @@ class KaprodiSeeder extends Seeder
     {
         User::create([
             'name' => 'Pak Kusnadi',
-            'email' => 'ade20@gmail.com',
+            'email' => 'admin20@gmail.com',
+            'password' => Hash::make('admin#123'),
+            'role' => 'kaprodi-TI'
+        ]);
+        User::create([
+            'name' => 'Pak Willy',
+            'email' => 'admin30@gmail.com',
             'password' => Hash::make('admin#123'),
             'role' => 'kaprodi-TI'
         ]);
