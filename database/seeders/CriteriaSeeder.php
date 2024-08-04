@@ -24,24 +24,24 @@ class CriteriaSeeder extends Seeder
             'role_criteria' => 'subject',
         ]);
         Criteria::create([
+            'name' => 'SMK',
+            'weight' => '0.25',
+            'role_criteria' => 'subject',
+        ]);
+        Criteria::create([
             'name' => 'Matematika',
             'weight' => '0.2',
-            'role_criteria' => 'subject',
+            'role_criteria' => 'all-subject',
         ]);
         Criteria::create([
             'name' => 'Bahasa Indonesia',
             'weight' => '0.15',
-            'role_criteria' => 'subject',
+            'role_criteria' => 'all-subject',
         ]);
         Criteria::create([
             'name' => 'Bahasa Inggris',
             'weight' => '0.15',
-            'role_criteria' => 'subject',
-        ]);
-        Criteria::create([
-            'name' => 'SMK',
-            'weight' => '0.25',
-            'role_criteria' => 'subject',
+            'role_criteria' => 'all-subject',
         ]);
     }
 }

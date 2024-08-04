@@ -35,7 +35,7 @@ class StudentController extends Controller
         }
 
         $biodata = $data->validated();
-        $subject = Major::find($biodata['major_id'])->criterias;
+        $subject = Major::find($biodata['major_id'])->criterias()->whereIn('role_criteria',['subject','all-subject'])->get();
         return view('form-kriteria',['biodata' => $biodata, 'subject' => $subject]);
     }
 
@@ -66,8 +66,6 @@ class StudentController extends Controller
             array_push($matrix["TI"],$major_TI_result);
 
             foreach ($criteria_TI as $value) {
-                    // Bobot
-                    array_push($weights, $value->weight);
                 foreach ($value->valueCriterias as $item){
                     if ($item->role == 'TI') {
                         array_push($matrix["TI"],$item->value);
@@ -76,10 +74,11 @@ class StudentController extends Controller
             }
 
             // MJ
+            // Memasukkan nilai dan bobot pada mapel
             foreach ($criteria as $value) {
                 foreach ($data['subject'] as $key => $valuesubject) {
                     if ($value['id'] == $key) {
-                        if ($value['role_criteria'] == 'all-subject') {
+                        if ($value['role_criteria'] != 'all-subject') {
                             $subject[$value['id']] = $valuesubject;
                             $weights[$value['id']] = $value['weight'];
                         }else{
@@ -89,25 +88,33 @@ class StudentController extends Controller
                     }
                 }
             }
+            // Memasukkan bobot jurusan dan kriteria lainnya
+            array_push($weights, 0.1);
+            foreach ($criteria_TI as $value) {
+                  // Bobot
+                  array_push($weights, $value->weight);
+            }
 
             // Nilai Jurusan
             array_push($subject, '2');
 
+            // Input Mapel Kriteria TI ke Matrix
+            $matrix["MJ"] = $subject;
             // Kriteria Selain Mapel untuk MJ
             $criteria_MJ = Criteria::with('valueCriterias')->Where('role_criteria','all')->get();
             foreach ($criteria_MJ as $value) {
                 foreach ($value->valueCriterias as $item){
+                    // return dd($item->value,$matrix);
                     if ($item->role == 'MJ') {
                         array_push($matrix["MJ"],$item->value);
                     }
                 }
             }
 
-            // Input Matrix
-            $matrix["MJ"] = $subject;
+
             // array_push($matrix,$subject);
 
-            return dd($subject,$data['subject'],$matrix,$weights);
+            // return dd($data,$subject,$matrix,$weights);
             // (AV)
             $AV =  $this->calculateAverage($matrix);
             $PDA_NDA = $this->calculatePDA_NDA($matrix,$AV);
@@ -115,9 +122,9 @@ class StudentController extends Controller
             $NSP_NSN = $this->normalizeSP_SN($matrix,$SP_SN[0],$SP_SN[1],$weights);
             $AS = $this->calculateApraisalScore($matrix,$NSP_NSN[0],$NSP_NSN[1]);
             arsort($AS);
-            $huhu = key($AS);
-            return dd($subject,$data['subject'],$matrix,$weights,$SP_SN,$AS, $huhu);
-
+            $result_AS = key($AS);
+            // return dd($subject,$data['subject'],$matrix,$weights,$SP_SN,$AS, $result_AS);
+            return view('hasil_kriteria',['result_AS' => $result_AS]);
 
         }elseif ($major['study_program'] == 'MJ') {
                 // MJ
@@ -130,8 +137,6 @@ class StudentController extends Controller
                 array_push($matrix["MJ"],$major_MJ_result);
 
                 foreach ($criteria_MJ as $value) {
-                        // Bobot
-                        array_push($weights, $value->weight);
                     foreach ($value->valueCriterias as $item){
                         if ($item->role == 'MJ') {
                             array_push($matrix["MJ"],$item->value);
@@ -155,8 +160,17 @@ class StudentController extends Controller
                     }
                 }
 
+                array_push($weights, 0.1);
+                foreach ($criteria_MJ as $value) {
+                      // Bobot
+                      array_push($weights, $value->weight);
+                }
+
                 // Nilai Jurusan
                 array_push($subject, '2');
+
+                // Input Mapel Kriteria TI ke Matrix
+                $matrix["TI"] = $subject;
 
                 // Kriteria Selain Mapel untuk TI
                 $criteria_TI = Criteria::with('valueCriterias')->Where('role_criteria','all')->get();
@@ -168,10 +182,7 @@ class StudentController extends Controller
                     }
                 }
 
-                // Input Matrix
-                $matrix["TI"] = $subject;
-
-                return dd($subject,$data['subject'],$matrix,$weights);
+                // return dd($subject,$data['subject'],$matrix,$weights);
                 // (AV)
                 $AV =  $this->calculateAverage($matrix);
                 $PDA_NDA = $this->calculatePDA_NDA($matrix,$AV);
@@ -179,9 +190,10 @@ class StudentController extends Controller
                 $NSP_NSN = $this->normalizeSP_SN($matrix,$SP_SN[0],$SP_SN[1],$weights);
                 $AS = $this->calculateApraisalScore($matrix,$NSP_NSN[0],$NSP_NSN[1]);
                 arsort($AS);
-                $huhu = key($AS);
-                return dd($subject,$data['subject'],$matrix,$weights,$SP_SN,$AS, $huhu);
-        }else {
+                $result_AS = key($AS);
+                // return dd($subject,$data['subject'],$matrix,$weights,$SP_SN,$AS, $huhu);
+                return view('hasil_kriteria',['result_AS' => $result_AS]);
+            }else {
             return redirect()->route('biodata.index');
         }
     }
@@ -241,12 +253,18 @@ class StudentController extends Controller
             $PDA[$key] = array();
             $NDA[$key] = array();
             foreach($alternative as $key_c => $criteria ){
-                if($type == 'benefit'){
-                    $PDA[$key][$key_c] = max(0,($criteria-$AV[$key_c]) / $AV[$key_c]);
-                    $NDA[$key][$key_c] = max(0,($AV[$key_c]-$criteria) / $AV[$key_c]);
+                if ($AV[$key_c] == 0) {
+                    $PDA[$key][$key_c] = 0;
+                    $NDA[$key][$key_c] = 0;
                 }else{
-                    $PDA[$key][$key_c] = max(0,($AV[$key_c]-$criteria) / $AV[$key_c]);
-                    $NDA[$key][$key_c] = max(0,($criteria-$AV[$key_c]) / $AV[$key_c]);
+                    if($type == 'benefit'){
+                        // return dd($alternative,max(0,($criteria-$AV[$key_c]) / $AV[$key_c]));
+                        $PDA[$key][$key_c] = max(0,($criteria - $AV[$key_c]) / $AV[$key_c]);
+                        $NDA[$key][$key_c] = max(0,($AV[$key_c] - $criteria) / $AV[$key_c]);
+                    }else{
+                        $PDA[$key][$key_c] = max(0,($AV[$key_c] - $criteria) / $AV[$key_c]);
+                        $NDA[$key][$key_c] = max(0,($criteria - $AV[$key_c]) / $AV[$key_c]);
+                    }
                 }
             }
         }

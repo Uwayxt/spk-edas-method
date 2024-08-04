@@ -27,7 +27,7 @@ class CriteriaMajorSeeder extends Seeder
         $criteriaEkonomi = Criteria::where('name','Ekonomi')->first();;
         $criteriaSMK = Criteria::where('name','SMK')->first();;
 
-        $majorSMAIPA = Major::where('name','SMA (IPA)')->first();
+        $majorSMAIPA = Major::where('name','SMA (MIPA)')->first();
         $majorSMAIPS = Major::where('name','SMA (IPS)')->first();
         $majorAK = Major::where('name','Akuntansi')->first();
         $majorBDPM = Major::where('name','BDPM')->first();

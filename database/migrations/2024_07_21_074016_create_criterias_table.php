@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('criterias', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->double('weight');
             $table->enum('role_criteria',['all','all-subject','subject']);
             $table->timestamps();
         });
