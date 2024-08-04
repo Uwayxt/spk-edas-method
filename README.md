@@ -118,6 +118,12 @@ ini berarti akan dilakukan perhitungan metode edas
 note :
 ketika pengguna memilih jurusan maka mata pelajaran yang akan di isi akan terfilter agar tidak diisi untuk mapel yang tidak ada
 
+## Set Up
+```php
+php artisan install
+```
+
+
 ## Referensi
 - (Aplikasi Pemilihan Fakultas di Universitas Klabat Bagi Calon Mahasiswa Menggunakan Metode DSS Fuzzy) [https://cogito.unklab.ac.id/index.php/cogito/article/view/109/78]
 - (Evaluation based on Distance from Average Solution (EDAS)) [https://extra.cahyadsn.com/edas]

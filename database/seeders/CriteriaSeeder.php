@@ -39,19 +39,9 @@ class CriteriaSeeder extends Seeder
             'role_criteria' => 'subject',
         ]);
         Criteria::create([
-            'name' => 'Akreditasi Program',
-            'weight' => '0.05',
-            'role_criteria' => 'all',
-        ]);
-        Criteria::create([
-            'name' => 'Prospek Kerja',
-            'weight' => '0.05',
-            'role_criteria' => 'all',
-        ]);
-        Criteria::create([
-            'name' => 'Fasilitas Penunjang',
-            'weight' => '0.05',
-            'role_criteria' => 'all',
+            'name' => 'SMK',
+            'weight' => '0.25',
+            'role_criteria' => 'subject',
         ]);
     }
 }

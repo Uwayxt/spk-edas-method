@@ -56,22 +56,91 @@ class StudentController extends Controller
         $matrix = [];
 
         if ($major['study_program'] == 'TI') {
-            // foreach ($data['subject'] as $value) {
-                //     array_push($matrix, $reset);
-                //     array_push($matrix['TI'], $data['subject'][]);
-                // }
-            }elseif ($major['study_program'] == 'MJ') {
+            // TI
+            $matrix["TI"] =  $reset;
+            $criteria = Criteria::where('role_criteria','all-subject')->orWhere('role_criteria','subject')->get();
+            $criteria_MJ = Criteria::with('valueCriterias')->Where('role_criteria','all')->get();
+            $subject = [];
+            $weights = [];
+            $major_MJ_result = $this->majorValue($major);
+            array_push($matrix["TI"],$major_MJ_result);
+
+            foreach ($criteria_MJ as $value) {
+                    // Bobot
+                    array_push($weights, $value->weight);
+                foreach ($value->valueCriterias as $item){
+                    if ($item->role == 'TI') {
+                        array_push($matrix["TI"],$item->value);
+                    }
+                }
+            }
+
+            // MJ
+            foreach ($criteria as $value) {
+                foreach ($data['subject'] as $key => $valuesubject) {
+                    if ($value['id'] == $key) {
+                        if ($value['role_criteria'] == 'all-subject') {
+                            $subject[$value['id']] = $valuesubject;
+                            $weights[$value['id']] = $value['weight'];
+                        }else{
+                            $subject[$value['id']] = "1";
+                            $weights[$value['id']] = $value['weight'];
+                        }
+                    }
+                }
+            }
+
+            // Nilai Jurusan
+            array_push($subject, '2');
+
+            // Kriteria Selain Mapel untuk TI
+            $criteria_MJ = Criteria::with('valueCriterias')->Where('role_criteria','all')->get();
+            foreach ($criteria_MJ as $value) {
+                foreach ($value->valueCriterias as $item){
+                    if ($item->role == 'MJ') {
+                        array_push($matrix["MJ"],$item->value);
+                    }
+                }
+            }
+
+            // Input Matrix
+            $matrix["MJ"] = $subject;
+            // array_push($matrix,$subject);
+
+            return dd($subject,$data['subject'],$matrix,$weights);
+            // (AV)
+            $AV =  $this->calculateAverage($matrix);
+            $PDA_NDA = $this->calculatePDA_NDA($matrix,$AV);
+            $SP_SN = $this->calculateSP_SN($matrix,$PDA_NDA[0],$PDA_NDA[1],$weights);
+            $NSP_NSN = $this->normalizeSP_SN($matrix,$SP_SN[0],$SP_SN[1],$weights);
+            $AS = $this->calculateApraisalScore($matrix,$NSP_NSN[0],$NSP_NSN[1]);
+            arsort($AS);
+            $huhu = key($AS);
+            return dd($subject,$data['subject'],$matrix,$weights,$SP_SN,$AS, $huhu);
+
+
+        }elseif ($major['study_program'] == 'MJ') {
+                // MJ
                 $matrix["MJ"] =  $reset;
                 $criteria = Criteria::where('role_criteria','all-subject')->orWhere('role_criteria','subject')->get();
-                $weights = [];
+                $criteria_MJ = Criteria::with('valueCriterias')->Where('role_criteria','all')->get();
                 $subject = [];
+                $weights = [];
                 $major_MJ_result = $this->majorValue($major);
-                array_push($matrix["MJ"],
-                $major_MJ_result,  // Jurusan Sekolah
-                '3',  // Akreditasi Program
-                '2',  // Prospek Kerja
-                '4'   // Fasilitas Penunjang
-                );
+                array_push($matrix["MJ"],$major_MJ_result);
+
+                foreach ($criteria_MJ as $value) {
+                        // Bobot
+                        array_push($weights, $value->weight);
+                    foreach ($value->valueCriterias as $item){
+                        if ($item->role == 'MJ') {
+                            array_push($matrix["MJ"],$item->value);
+                        }
+                    }
+                }
+
+                // TI
+                // Memasukkan nilai dan bobot pada mapel
                 foreach ($criteria as $value) {
                     foreach ($data['subject'] as $key => $valuesubject) {
                         if ($value['id'] == $key) {
@@ -85,25 +154,24 @@ class StudentController extends Controller
                         }
                     }
                 }
-                $major_TI_result = $this->majorValue($major);
-                array_push($subject,
-                $major_TI_result,  // Jurusan Sekolah
-                '3',  // Akreditasi Program
-                '2',  // Prospek Kerja
-                '4'   // Fasilitas Penunjang
-                );
 
-                // Bobot
-                array_push($weights,
-                '0.3',  // Jurusan Sekolah
-                '0.1',  // Akreditasi Program
-                '0.02',  // Prospek Kerja
-                '0.05'   // Fasilitas Penunjang
-                );
+                // Nilai Jurusan
+                array_push($subject, '2');
+
+                // Kriteria Selain Mapel untuk TI
+                $criteria_TI = Criteria::with('valueCriterias')->Where('role_criteria','all')->get();
+                foreach ($criteria_TI as $value) {
+                    foreach ($value->valueCriterias as $item){
+                        if ($item->role == 'TI') {
+                            array_push($matrix["TI"],$item->value);
+                        }
+                    }
+                }
+
+                // Input Matrix
                 $matrix["TI"] = $subject;
-                // array_push($matrix,$subject);
 
-                // return dd($subject,$data['subject'],$matrix,$weights);
+                return dd($subject,$data['subject'],$matrix,$weights);
                 // (AV)
                 $AV =  $this->calculateAverage($matrix);
                 $PDA_NDA = $this->calculatePDA_NDA($matrix,$AV);
@@ -116,8 +184,6 @@ class StudentController extends Controller
         }else {
             return redirect()->route('biodata.index');
         }
-        // $major = Major::;
-        //  Average Solution (AV)
     }
 
     /**
@@ -185,7 +251,6 @@ class StudentController extends Controller
             }
         }
 
-        // return dd($PDA,$NDA);
         return [$PDA,$NDA];
     }
 

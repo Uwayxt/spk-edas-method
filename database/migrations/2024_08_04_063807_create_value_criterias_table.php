@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('value_criteria', function (Blueprint $table) {
+        Schema::create('value_criterias', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('criteria_id');
             $table->enum('role',['TI','MJ']);
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('value_criteria');
+        Schema::dropIfExists('value_criterias');
     }
 };

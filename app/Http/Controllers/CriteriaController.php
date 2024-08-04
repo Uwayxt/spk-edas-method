@@ -40,8 +40,15 @@ class CriteriaController extends Controller
             'weight' => $data['weight'],
             'role_criteria' => 'all'
         ]);
-        // $criteria->majors()->attach($data['major_id']);
 
+        $criteria->valueCriterias()->create([
+            'role' => 'TI',
+            'value' => 0
+        ]);
+        $criteria->valueCriterias()->create([
+            'role' => 'MJ',
+            'value' => 0
+        ]);
         return redirect()->route('criteria.index')->with('message','Berhasil Menambahkan Kriteria');
     }
 
@@ -109,16 +116,6 @@ class CriteriaController extends Controller
             foreach ($major as $value) {
                 $criteria->majors()->attach($value->id);
             }
-        }else if ($data['major_id'] == 'smk') {
-            $criteria = Criteria::create([
-                'name' => $data['name'],
-                'weight' => $data['weight'],
-                'role_criteria' => 'subject'
-            ]);
-            $major = Major::whereIn('name',['OTKP','BDPM'.'Akuntansi','RPL', 'TKJ', 'Multimedia'])->get();
-            foreach ($major as $value) {
-                $criteria->majors()->attach($value->id);
-            }
         }else{
             $criteria = Criteria::create([
                 'name' => $data['name'],
@@ -172,3 +169,15 @@ class CriteriaController extends Controller
         return redirect()->route('criteria.index')->with('message','Berhasil Menambahkan Kriteria');
     }
 }
+
+// else if ($data['major_id'] == 'smk') {
+//     $criteria = Criteria::create([
+//         'name' => $data['name'],
+//         'weight' => $data['weight'],
+//         'role_criteria' => 'subject'
+//     ]);
+//     $major = Major::whereIn('name',['OTKP','BDPM'.'Akuntansi','RPL', 'TKJ', 'Multimedia'])->get();
+//     foreach ($major as $value) {
+//         $criteria->majors()->attach($value->id);
+//     }
+// }

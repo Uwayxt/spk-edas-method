@@ -13,4 +13,7 @@ class Criteria extends Model
     public function majors(){
         return $this->belongsToMany(Major::class);
     }
+    public function valueCriterias(){
+        return $this->hasMany(ValueCriteria::class);
+    }
 }

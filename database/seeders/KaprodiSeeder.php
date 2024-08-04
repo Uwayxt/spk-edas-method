@@ -24,7 +24,7 @@ class KaprodiSeeder extends Seeder
             'name' => 'Pak Willy',
             'email' => 'admin30@gmail.com',
             'password' => Hash::make('admin#123'),
-            'role' => 'kaprodi-TI'
+            'role' => 'kaprodi-MJ'
         ]);
     }
 }
