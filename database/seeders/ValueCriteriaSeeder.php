@@ -31,31 +31,31 @@ class ValueCriteriaSeeder extends Seeder
 
         $criteria_akreditasi->valueCriterias()->create([
             'role' => 'TI',
-            'value' => 0.05
+            'value' => 0
         ]);
 
         $criteria_akreditasi->valueCriterias()->create([
             'role' => 'MJ',
-            'value' => 0.05
+            'value' => 0
         ]);
 
         $criteria_prospek->valueCriterias()->create([
             'role' => 'TI',
-            'value' => 0.05
+            'value' => 0
         ]);
         $criteria_prospek->valueCriterias()->create([
             'role' => 'MJ',
-            'value' => 0.05
+            'value' => 0
         ]);
 
         $criteria_fasilitas->valueCriterias()->create([
             'role' => 'TI',
-            'value' => 0.05
+            'value' => 0
         ]);
 
         $criteria_fasilitas->valueCriterias()->create([
             'role' => 'MJ',
-            'value' => 0.05
+            'value' => 0
         ]);
     }
 }

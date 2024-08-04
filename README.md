@@ -134,12 +134,32 @@ php artisan migrate
 
 ## Set Up Data Kriteria
 Silahkan jalankan perintah berikut secara berurutan
+Seeder Admin
 ```php
 php artisan db:seed --class=AdminSeeder
+```
+
+Seeder Kaprodi
+```php
 php artisan db:seed --class=KaprodiSeeder
+```
+
+Seeder Criteria
+```php
 php artisan db:seed --class=CriteriaSeeder
+```
+Seeder Major
+```php
 php artisan db:seed --class=MajorSeeder
+```
+
+Seeder Bobot dan Nilai Kriteria Untuk Kriteria Selain Mapel
+```php
 php artisan db:seed --class=ValueCriteriaSeeder
+```
+Seeder Untuk menghubungkan berbagai Kriteria dengan Jurusan
+ada yang untuk semua jurusan ada yang hanya untuk jurusan tertentu
+```php
 php artisan db:seed --class=CriteriaMajorSeeder
 ```
 

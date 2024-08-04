@@ -59,13 +59,13 @@ class StudentController extends Controller
             // TI
             $matrix["TI"] =  $reset;
             $criteria = Criteria::where('role_criteria','all-subject')->orWhere('role_criteria','subject')->get();
-            $criteria_MJ = Criteria::with('valueCriterias')->Where('role_criteria','all')->get();
+            $criteria_TI = Criteria::with('valueCriterias')->Where('role_criteria','all')->get();
             $subject = [];
             $weights = [];
-            $major_MJ_result = $this->majorValue($major);
-            array_push($matrix["TI"],$major_MJ_result);
+            $major_TI_result = $this->majorValue($major);
+            array_push($matrix["TI"],$major_TI_result);
 
-            foreach ($criteria_MJ as $value) {
+            foreach ($criteria_TI as $value) {
                     // Bobot
                     array_push($weights, $value->weight);
                 foreach ($value->valueCriterias as $item){
@@ -93,7 +93,7 @@ class StudentController extends Controller
             // Nilai Jurusan
             array_push($subject, '2');
 
-            // Kriteria Selain Mapel untuk TI
+            // Kriteria Selain Mapel untuk MJ
             $criteria_MJ = Criteria::with('valueCriterias')->Where('role_criteria','all')->get();
             foreach ($criteria_MJ as $value) {
                 foreach ($value->valueCriterias as $item){
