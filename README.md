@@ -118,9 +118,29 @@ ini berarti akan dilakukan perhitungan metode edas
 note :
 ketika pengguna memilih jurusan maka mata pelajaran yang akan di isi akan terfilter agar tidak diisi untuk mapel yang tidak ada
 
-## Set Up
+## Set Up Laravel
+Instal Laravel beserta lainnya
 ```php
-php artisan install
+composer install
+```
+
+```php
+php artisan key:generate
+```
+
+```php
+php artisan migrate
+```
+
+## Set Up Data Kriteria
+Silahkan jalankan perintah berikut secara berurutan
+```php
+php artisan db:seed --class=AdminSeeder
+php artisan db:seed --class=KaprodiSeeder
+php artisan db:seed --class=CriteriaSeeder
+php artisan db:seed --class=MajorSeeder
+php artisan db:seed --class=ValueCriteriaSeeder
+php artisan db:seed --class=CriteriaMajorSeeder
 ```
 
 
