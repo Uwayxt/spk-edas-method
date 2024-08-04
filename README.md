@@ -134,6 +134,7 @@ php artisan migrate
 
 ## Set Up Data Kriteria
 Silahkan jalankan perintah berikut secara berurutan
+
 Seeder Admin
 ```php
 php artisan db:seed --class=AdminSeeder
