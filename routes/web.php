@@ -50,7 +50,7 @@ Route::prefix('admin')->middleware(['role:admin'])->group(function(){
     Route::get('/siswa', [StudentController::class,'index'])->name('admin.student.index');
     Route::get('/siswa/tambah', [StudentController::class,'create'])->name('admin.student.create');
     Route::post('/siswa/simpan', [StudentController::class,'store'])->name('admin.student.store');
-    Route::get('/siswa/{id}/', [StudentController::class,'show'])->name('admin.student.show');
+    Route::get('/siswa/{id}/', [StudentController::class,'showAdmin'])->name('admin.student.show');
     Route::get('/siswa/{id}/edit', [StudentController::class,'edit'])->name('admin.student.edit');
 
     // Jurusan

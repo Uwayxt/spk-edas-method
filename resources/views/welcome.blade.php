@@ -23,7 +23,7 @@
             Temukan program studi yang sesuai dengan passion dan tujuan karirmu. Kami menyediakan rekomendasi program studi dengan akreditasi sangat baik dan prospek masa depan yang cerah. Bersama kami, masa depan gemilangmu semakin dekat!</p>
           <div class="mt-10 flex items-center justify-center gap-x-6">
             <a href="/biodata" class="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Mulai Isi Form</a>
-            <a href="https://pmb.cic.ac.id/" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span aria-hidden="true">→</span></a>
+            <a href="https://pmb.cic.ac.id/" class="text-sm font-semibold leading-6 text-gray-900">Lebih Lanjut <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>

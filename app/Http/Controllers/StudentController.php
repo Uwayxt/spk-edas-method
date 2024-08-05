@@ -221,7 +221,14 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request,$id)
+    public function show(Request $request)
+    {
+        $data = $request->validate([
+            'result_AS' => 'required'
+        ]);
+        return view('hasil_kriteria',['result_AS' => $data['result_AS']]);
+    }
+    public function showAdmin(Request $request,$id)
     {
         $student = Student::with('subjectStudent')->find($id);
 
