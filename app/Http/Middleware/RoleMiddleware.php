@@ -26,6 +26,7 @@ class RoleMiddleware
             }
         }
         if ($request->user()->role !== $role) {
+            // return dd($request->user()->role);
             return redirect('/');
         }
         return $next($request);

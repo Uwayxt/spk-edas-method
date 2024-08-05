@@ -45,6 +45,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($student as $item)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td class="w-4 p-4">
                                 <div class="flex items-center">
@@ -53,24 +54,24 @@
                                 </div>
                             </td>
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Ade Octa
+                                {{ $item->name }}
                             </th>
                             <td class="px-6 py-4">
-                                202234021344
+                                {{ $item->school_address }}
                             </td>
 
                             <td class="px-6 py-4">
-                                12-07-2024
+                                {{ $item->majors->name }}
                             </td>
                             <td class="px-6 py-4">
-                                12-07-2024
+                                {{ $item->recomendation_result }}
                             </td>
 
                             <td class="flex items-center px-6 py-4">
-                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a>
-                                <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
+                                <a href=" {{ route('admin.student.show',['id' => $item->id]) }} " class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
                 <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">

@@ -47,11 +47,10 @@ class KaprodiController extends Controller
      */
     public function index()
     {
-        // $student = Student::with('majors')->get();
         $student = Student::whereHas('majors', function ($query) {
-            $query->where('study_program', 'TI');
+            $user = auth()->user()->role == 'kaprodi-TI' ? 'TI' : 'MJ';
+            $query->where('study_program', $user);
         })->get();
-        // return dd($student[0]->majors);
         return view('kaprodi.index',['student' => $student]);
     }
 

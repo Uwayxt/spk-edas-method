@@ -76,3 +76,12 @@ Route::prefix('kaprodi')->middleware(['role:kaprodi-TI,kaprodi-MJ'])->group(func
     Route::get('/siswa/{id}', [KaprodiController::class,'showStudent'])->name('kaprodi.student.show');
 
 });
+
+Route::prefix('kaprodi')->middleware(['role:kaprodi-MJ'])->group(function(){
+    Route::get('/', [KaprodiController::class,'index'])->name('kaprodi.index');
+    Route::get('/kriteria', [KaprodiController::class,'indexCriteria'])->name('kaprodi.criteria.index');
+    Route::get('/kriteria/{id}/edit', [KaprodiController::class,'editCriteria'])->name('kaprodi.criteria.edit');
+    Route::put('/kriteria/{id}', [KaprodiController::class,'updateCriteria'])->name('kaprodi.criteria.update');
+    Route::get('/siswa/{id}', [KaprodiController::class,'showStudent'])->name('kaprodi.student.show');
+
+});

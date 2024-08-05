@@ -16,6 +16,6 @@ class Student extends Model
     }
 
     public function subjectStudent()  {
-        return $this->belongsToMany(Criteria::class);
+        return $this->belongsToMany(Criteria::class)->withPivot('value');
     }
 }

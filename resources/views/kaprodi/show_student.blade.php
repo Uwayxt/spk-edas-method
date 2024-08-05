@@ -33,14 +33,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($student->subjectStudent as $item)
                             <tr class="bg-white dark:bg-gray-800">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Apple MacBook Pro 17"
+                                    {{ "C" . $loop->iteration}}
                                 </th>
                                 <td class="px-6 py-4">
-                                    1
+                                    {{ $item->pivot->value }}
                                 </td>
                             </tr>
+                            @endforeach
 
                         </tbody>
                     </table>
@@ -49,8 +51,8 @@
             <div class="sm:col-span-2">
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rekomendasi Program Studi</label>
                 <div class="flex items-center gap-5">
-                    <p type="button" class="{{($student->recommendation_result == 'MJ') ? 'Teknik Informatika' : 'bg-blue-700  text-white'}} font-medium rounded-full text-sm px-5 py-2.5 text-center  ">Manajemen</p>
-                    <p type="button" class="{{ ($student->recommendation_result == 'TI') ? 'Teknik Informatika' : 'bg-blue-700  text-white'}} font-medium rounded-full text-sm px-5 py-2.5 text-center  ">Teknik Informatika</p>
+                    <p type="button" class="{{($student->recomendation_result == 'MJ') ? 'Teknik Informatika' : 'bg-blue-700  text-white'}} font-medium rounded-full text-sm px-5 py-2.5 text-center  ">Manajemen</p>
+                    <p type="button" class="{{ ($student->recomendation_result == 'TI') ? 'Teknik Informatika' : 'bg-blue-700  text-white'}} font-medium rounded-full text-sm px-5 py-2.5 text-center  ">Teknik Informatika</p>
                 </div>
             </div>
         </div>

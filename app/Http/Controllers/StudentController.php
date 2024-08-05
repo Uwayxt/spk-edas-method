@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Criteria;
 use App\Models\Major;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -12,7 +13,8 @@ class StudentController extends Controller
 
 
     public function index(){
-        return view('admin.student.index');
+        $student = Student::with('majors')->simplePaginate(10);
+        return view('admin.student.index',['student' => $student]);
     }
 
     public function indexBiodata(){
@@ -124,7 +126,16 @@ class StudentController extends Controller
             arsort($AS);
             $result_AS = key($AS);
             // return dd($subject,$data['subject'],$matrix,$weights,$SP_SN,$AS, $result_AS);
-            return view('hasil_kriteria',['result_AS' => $result_AS]);
+            $student = Student::create([
+                'name' => $data['name'],
+                'school_address' => $data['school_address'],
+                'recomendation_result' => $result_AS,
+                'major_id' => $data['major_id']
+            ]);
+            foreach ($matrix[$result_AS] as $key => $item) {
+                $student->subjectStudent()->attach(1, ['value' => $item]);
+            }
+            return redirect()->route('student.show',['result_AS' => $result_AS]);
 
         }elseif ($major['study_program'] == 'MJ') {
                 // MJ
@@ -167,7 +178,7 @@ class StudentController extends Controller
                 }
 
                 // Nilai Jurusan
-                array_push($subject, '2');
+                array_push($subject, 2);
 
                 // Input Mapel Kriteria TI ke Matrix
                 $matrix["TI"] = $subject;
@@ -192,7 +203,16 @@ class StudentController extends Controller
                 arsort($AS);
                 $result_AS = key($AS);
                 // return dd($subject,$data['subject'],$matrix,$weights,$SP_SN,$AS, $huhu);
-                return view('hasil_kriteria',['result_AS' => $result_AS]);
+                $student = Student::create([
+                    'name' => $data['name'],
+                    'school_address' => $data['school_address'],
+                    'recomendation_result' => $result_AS,
+                    'major_id' => $data['major_id']
+                ]);
+                foreach ($matrix[$result_AS] as $key => $item) {
+                    $student->subjectStudent()->attach(1, ['value' => $item]);
+                }
+                return redirect()->route('student.show',['result_AS' => $result_AS]);
             }else {
             return redirect()->route('biodata.index');
         }
@@ -201,9 +221,11 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(Request $request,$id)
     {
-        return view('hasil_kriteria');
+        $student = Student::with('subjectStudent')->find($id);
+
+        return view('kaprodi.show_student',['student' => $student]);
     }
 
     /**
