@@ -44,6 +44,7 @@ Route::prefix('admin')->middleware(['role:admin'])->group(function(){
     Route::get('/kriteria/{id}/', [CriteriaController::class,'show'])->name('criteria.show');
     Route::get('/kriteria/{id}/edit', [CriteriaController::class,'edit'])->name('criteria.edit');
     Route::put('/kriteria/{id}/', [CriteriaController::class,'update'])->name('criteria.update');
+    Route::delete('/kriteria/{id}/', [CriteriaController::class,'destroy'])->name('criteria.destroy');
 
 
     // Siswa
@@ -59,7 +60,8 @@ Route::prefix('admin')->middleware(['role:admin'])->group(function(){
     Route::post('/jurusan/simpan', [MajorController::class,'store'])->name('major.store');
     Route::get('/jurusan/{id}/', [MajorController::class,'show'])->name('major.show');
     Route::get('/jurusan/{id}/edit', [MajorController::class,'edit'])->name('major.edit');
-    Route::put('/siswa/{id}/', [MajorController::class,'update'])->name('major.update');
+    Route::put('/jurusan/{id}/', [MajorController::class,'update'])->name('major.update');
+    Route::delete('/jurusan/{id}/', [MajorController::class,'destroy'])->name('major.destroy');
 
 });
 
@@ -68,7 +70,7 @@ Route::prefix('admin')->middleware(['role:admin'])->group(function(){
 Route::get('/login',[KaprodiController::class,'login'])->name('kaprodi.login');
 Route::post('/login/authenticate',[KaprodiController::class,'authenticate'])->name('kaprodi.authenticate');
 
-Route::prefix('kaprodi')->middleware(['role:kaprodi-TI,kaprodi-MJ'])->group(function(){
+Route::prefix('kaprodi')->middleware(['role:kaprodi-TI'])->group(function(){
     Route::get('/', [KaprodiController::class,'index'])->name('kaprodi.index');
     Route::get('/kriteria', [KaprodiController::class,'indexCriteria'])->name('kaprodi.criteria.index');
     Route::get('/kriteria/{id}/edit', [KaprodiController::class,'editCriteria'])->name('kaprodi.criteria.edit');

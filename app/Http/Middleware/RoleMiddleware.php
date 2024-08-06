@@ -25,10 +25,10 @@ class RoleMiddleware
                 return redirect('/');
             }
         }
-        if ($request->user()->role !== $role) {
-            // return dd($request->user()->role);
-            return redirect('/');
-        }
+        // if ($request->user()->role !== $role) {
+        //     return dd($request->user()->role,$role);
+        //     return redirect('/');
+        // }
         return $next($request);
     }
 }

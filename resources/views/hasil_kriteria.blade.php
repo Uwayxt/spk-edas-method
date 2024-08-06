@@ -17,14 +17,14 @@
                 <div class="mt-2">
                     <h4 class="text-xl font-semibold text-gray-900 dark:text-white">Informatika</h4>
                     <p class="text-gray-600 dark:text-gray-400">Cocok untuk Anda yang tertarik dengan teknologi dan pemrograman.</p>
-                    <p class="text-gray-600 dark:text-gray-400"><span class="font-semibold">Akreditasi:</span> A</p>
+                    <p class="text-gray-600 dark:text-gray-400"><span class="font-semibold">Akreditasi:</span> Baik Sekali</p>
                     <p class="text-gray-600 dark:text-gray-400"><span class="font-semibold">Prospek Karir:</span> Software Engineer, Data Scientist, IT Consultant</p>
                 </div>
                 @else
                 <div class="mt-4">
                     <h4 class="text-xl font-semibold text-gray-900 dark:text-white">Manajemen</h4>
                     <p class="text-gray-600 dark:text-gray-400">Ideal bagi Anda yang ingin mengembangkan kemampuan manajerial dan kepemimpinan.</p>
-                    <p class="text-gray-600 dark:text-gray-400"><span class="font-semibold">Akreditasi:</span> A</p>
+                    <p class="text-gray-600 dark:text-gray-400"><span class="font-semibold">Akreditasi:</span> Baik Sekali</p>
                     <p class="text-gray-600 dark:text-gray-400"><span class="font-semibold">Prospek Karir:</span> Manager, Business Analyst, Entrepreneur</p>
                 </div>
                 @endif

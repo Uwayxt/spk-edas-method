@@ -8,7 +8,7 @@
 <section class="bg-white dark:bg-gray-900">
 
     <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-        <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Ubah Nilai Kriteria</h2>
+        <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Detail Siswa</h2>
             <div class="flex flex-col gap-0 sm:grid-cols-2 sm:gap-0">
 
                 <div class="sm:col-span-2">
@@ -16,8 +16,12 @@
                     <h3 class="mb-4 text-md font-bold text-gray-900 dark:text-white">{{ $student->name }}</h3>
                 </div>
                 <div class="sm:col-span-2">
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jurusan Sekolah</label>
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Asal Sekolah</label>
                     <h3 class="mb-4 text-md font-bold text-gray-900 dark:text-white">{{ $student->school_address }}</h3>
+                </div>
+                <div class="sm:col-span-2">
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jurusan Sekolah</label>
+                    <h3 class="mb-4 text-md font-bold text-gray-900 dark:text-white">{{ $student->majors->name }}</h3>
                 </div>
                 <div class="sm:col-span-2">
                 <div class="relative overflow-x-auto mb-4 ">
@@ -51,8 +55,8 @@
             <div class="sm:col-span-2">
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rekomendasi Program Studi</label>
                 <div class="flex items-center gap-5">
-                    <p type="button" class="{{($student->recomendation_result == 'MJ') ? 'Teknik Informatika' : 'bg-blue-700  text-white'}} font-medium rounded-full text-sm px-5 py-2.5 text-center  ">Manajemen</p>
-                    <p type="button" class="{{ ($student->recomendation_result == 'TI') ? 'Teknik Informatika' : 'bg-blue-700  text-white'}} font-medium rounded-full text-sm px-5 py-2.5 text-center  ">Teknik Informatika</p>
+                    <p type="button" class="{{($student->recomendation_result != 'MJ') ? 'Teknik Informatika' : 'bg-blue-700  text-white'}} font-medium rounded-full text-sm px-5 py-2.5 text-center  ">Manajemen</p>
+                    <p type="button" class="{{ ($student->recomendation_result != 'TI') ? 'Teknik Informatika' : 'bg-blue-700  text-white'}} font-medium rounded-full text-sm px-5 py-2.5 text-center  ">Teknik Informatika</p>
                 </div>
             </div>
         </div>

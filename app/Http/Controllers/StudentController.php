@@ -65,7 +65,7 @@ class StudentController extends Controller
             $subject = [];
             $weights = [];
             $major_TI_result = $this->majorValue($major);
-            array_push($matrix["TI"],$major_TI_result);
+            array_push($matrix["TI"],$major['value']);
 
             foreach ($criteria_TI as $value) {
                 foreach ($value->valueCriterias as $item){
@@ -145,7 +145,7 @@ class StudentController extends Controller
                 $subject = [];
                 $weights = [];
                 $major_MJ_result = $this->majorValue($major);
-                array_push($matrix["MJ"],$major_MJ_result);
+                array_push($matrix["MJ"],$major['value']);
 
                 foreach ($criteria_MJ as $value) {
                     foreach ($value->valueCriterias as $item){
@@ -228,7 +228,7 @@ class StudentController extends Controller
         ]);
         return view('hasil_kriteria',['result_AS' => $data['result_AS']]);
     }
-    public function showAdmin(Request $request,$id)
+    public function showAdmin($id)
     {
         $student = Student::with('subjectStudent')->find($id);
 

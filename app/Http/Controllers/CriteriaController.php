@@ -88,7 +88,9 @@ class CriteriaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $criteria = Criteria::find($id);
+        $criteria->delete();
+        return redirect()->route('criteria.index');
     }
 
     public function createSubject()

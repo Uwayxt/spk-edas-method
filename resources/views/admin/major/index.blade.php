@@ -44,6 +44,9 @@
                                 Nama Jurusan
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Nilai Kriteria
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Action
                             </th>
                         </tr>
@@ -63,9 +66,16 @@
                                 <td class="px-6 py-4">
                                     {{ $item->name }}
                                 </td>
+                                <td class="px-6 py-4">
+                                    {{ $item->value }}
+                                </td>
                                 <td class="flex items-center px-6 py-4">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
+                                    <a href="{{ route('major.edit',[$item->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                    <form action="{{ route('major.destroy',[$item->id]) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
